@@ -31,7 +31,7 @@ WinLib Interface Class (WLIC) is a flexible GUI framework designed for VEX Robot
 
 1. **Clone this repository:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/WinLib_InterfaceClass.git
+   git clone https://github.com/WinYeh/WinLib_InterfaceClass.git
    cd WinLib_InterfaceClass
    ```
 
@@ -322,7 +322,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Issues:** Report bugs via [GitHub Issues](https://github.com/YOUR_USERNAME/WinLib_InterfaceClass/issues)
+- **Issues:** Report bugs via [GitHub Issues](https://github.com/WinYeh/WinLib_InterfaceClass/issues)
 - **Documentation:** See [claude.h](claude.h) for detailed documentation
 - **VEX Forums:** Discuss on [VEX Forum](https://www.vexforum.com/)
 

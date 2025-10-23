@@ -1,0 +1,23 @@
+# VEX Build Files
+/bin
+/build
+compile_commands.json
+*.bin
+*.elf
+*.o
+
+# VEX Temporary Files
+.vex_cache/
+
+# IDE Files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# VSCode (keep project settings)
+.vscode/.browse.c_cpp.db*
+.vscode/ipch/
+
+# OS Files
+Thumbs.db

@@ -150,8 +150,7 @@ WinLib_InterfaceClass/
 ├── include/
 │   ├── WLIC.h              # Interface class header
 │   ├── vex.h               # VEX includes and macros
-│   ├── robot-config.h      # Robot hardware configuration
-│   └── claude.h            # Comprehensive documentation
+│   └── robot-config.h      # Robot hardware configuration
 ├── src/
 │   ├── WLIC.cpp            # Interface implementation
 │   ├── main.cpp            # Competition template
@@ -264,11 +263,7 @@ Interface MyInterface(coords, handleActions, display);
 - Only one interface should have `index == -1`
 - Ensure `Interface::reset()` is called regularly
 
-See [claude.h](claude.h) for comprehensive troubleshooting guide.
-
 ## 📄 API Reference
-
-For complete API documentation, see [claude.h](claude.h).
 
 ### Quick Reference
 
@@ -301,7 +296,7 @@ Contributions are welcome! Here's how you can help:
 
 ### Coding Guidelines
 
-- Follow existing code style (see [claude.h](claude.h))
+- Follow existing code style and naming conventions
 - Comment button coordinates and complex logic
 - Test on actual VEX V5 hardware when possible
 - Update documentation for new features
@@ -323,7 +318,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 - **Issues:** Report bugs via [GitHub Issues](https://github.com/WinYeh/WinLib_InterfaceClass/issues)
-- **Documentation:** See [claude.h](claude.h) for detailed documentation
+- **Documentation:** See the code comments and examples in the repository
 - **VEX Forums:** Discuss on [VEX Forum](https://www.vexforum.com/)
 
 ## 🗺️ Roadmap

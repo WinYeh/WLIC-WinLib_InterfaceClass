@@ -21,3 +21,6 @@ compile_commands.json
 
 # OS Files
 Thumbs.db
+
+# Private Documentation
+claude.h

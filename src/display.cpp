@@ -17,6 +17,7 @@ int printPerformance()
     Brain.Screen.drawLine(25, 140, 320, 140);       // horizontal line
     Brain.Screen.drawLine(165, 120, 165, 200);      // vertical line
 
+    // to be changed: replace setCursor by printAt to avoid text overlapping 
     Brain.Screen.setCursor(7, 4);
     Brain.Screen.print("Left: %.1fv", Left.voltage(voltageUnits::volt) ); 
     Brain.Screen.setCursor(8, 6);

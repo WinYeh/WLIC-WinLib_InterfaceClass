@@ -5,11 +5,11 @@ void setStatus(std::string stat);
 int printPerformance(); 
 void displayHome(); 
 
-void drawdirection(double angle); 
-void setTargetHeading(double targ); 
+void drawdirection(double heading); 
+int drawHeading(); 
 void displayHeading();
 
-void displayPowerflow();
+void displayPorts();
 
 void displayAuton();
 void displayAutonRed(); 

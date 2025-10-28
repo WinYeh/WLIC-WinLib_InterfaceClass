@@ -171,7 +171,7 @@ The project includes several example interfaces:
 
 - **Home** - Main menu
 - **Heading** - Compass/orientation display
-- **Powerflow** - Motor and sensor status
+- **Ports** - Motor and sensor status
 - **Auton Selector** - Autonomous routine selection
 - **Utilities** - Settings and configuration
 

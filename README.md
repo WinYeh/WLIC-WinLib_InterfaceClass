@@ -13,10 +13,15 @@ WinLib Interface Class (WLIC) is a flexible GUI framework designed for VEX Robot
 ### Key Features
 
 ✅ **Hierarchical Navigation** - Create multi-level menu systems with parent-child relationships
+
 ✅ **Touch Detection** - Automatic button press detection with coordinate-based hit testing
+
 ✅ **Background Updates** - Run continuous update tasks for dynamic displays
+
 ✅ **RLE Image Support** - Efficient Run-Length Encoded image rendering
+
 ✅ **Callback System** - Execute custom actions on button presses
+
 ✅ **State Management** - Clean interface activation and deactivation
 
 ## 🚀 Quick Start
@@ -45,104 +50,6 @@ WinLib Interface Class (WLIC) is a flexible GUI framework designed for VEX Robot
    - Connect your V5 Brain
    - Download to robot
 
-### Basic Usage
-
-```cpp
-#include "WLIC.h"
-
-// Define your display function
-void displayMyMenu() {
-    Brain.Screen.clearScreen();
-    Brain.Screen.printAt(10, 20, "My Custom Menu");
-    Brain.Screen.drawRectangle(20, 50, 200, 40);  // Button
-}
-
-// Define button coordinates {x_min, x_max, y_min, y_max}
-std::vector<std::vector<double>> menu_coords = {
-    { 20, 220, 50, 90 }    // Button 0
-};
-
-// Create the interface
-Interface MyMenu(&menu_coords, nullptr, displayMyMenu);
-
-// In your main loop
-MyMenu.setIndex(-1);       // Activate
-MyMenu.Display();          // Show
-while(1) {
-    MyMenu.activate();     // Check for touches
-    Interface::reset();
-    wait(100, msec);
-}
-```
-
-## 📖 Documentation
-
-### Interface Class
-
-The `Interface` class is the core of the framework. It supports various combinations of features:
-
-#### Constructor Options
-
-```cpp
-// Display only
-Interface(void (*display)());
-
-// Interactive with buttons
-Interface(button_coord, actions, display);
-
-// Navigation between interfaces
-Interface(button_coord, linked_Interface, display);
-
-// Full-featured
-Interface(button_coord, linked_Interface, actions, display, updateInterface);
-```
-
-#### Key Methods
-
-- `setIndex(int)` - Activate interface (-1) or set button state
-- `Display()` - Render the interface and start update tasks
-- `activate()` - Main state machine, handles touch detection
-- `InterfaceChooser()` - Detect which button was pressed
-- `static reset()` - Reset state after screen release
-
-### Button Coordinates
-
-Buttons are defined as rectangular regions:
-
-```cpp
-std::vector<std::vector<double>> coords = {
-    { x_min, x_max, y_min, y_max }
-};
-```
-
-**VEX V5 Screen:** 480×240 pixels, origin at top-left (0,0)
-
-Example:
-```cpp
-{ 340, 480, 20, 60 }  // Button from (340,20) to (480,60)
-```
-
-### Navigation System
-
-Link interfaces to create hierarchical menus:
-
-```cpp
-std::vector<Interface*> linkedItf = {
-    &ChildInterface1,
-    &ChildInterface2
-};
-
-ParentInterface = Interface(&coords, &linkedItf, displayFunc);
-```
-
-Button index determines which child interface to navigate to.
-
-### Image Rendering
-
-WLIC supports Run-Length Encoded (RLE) images for efficient graphics. Convert your images using:
-
-🔗 [VEX Image Converter](https://suhjae.github.io/vex-image/)
-
 ## 🏗️ Project Structure
 
 ```
@@ -157,96 +64,72 @@ WinLib_InterfaceClass/
 │   └── robot-config.cpp    # Hardware initialization
 ├── vex/                    # VEX SDK files
 ├── .vscode/                # VSCode configuration
+├── assets/                 # Interface screenshots and images
 ├── makefile                # Build configuration
 ├── README.md               # This file
 ├── LICENSE                 # MIT License
 └── .gitignore              # Git ignore rules
 ```
 
-## 📚 Examples
+## 🎨 Built-in Interfaces
 
-### Pre-Built Interfaces
+WLIC comes with a complete set of pre-built interfaces to help VEX Robotics teams quickly create professional, customizable screens for their robots. These interfaces demonstrate the framework's capabilities and serve as templates that you can modify for your own needs.
 
-The project includes several example interfaces:
+### Interface Hierarchy
 
-- **Home** - Main menu
-- **Heading** - Compass/orientation display
-- **Ports** - Motor and sensor status
-- **Auton Selector** - Autonomous routine selection
-- **Utilities** - Settings and configuration
+The built-in interfaces are organized in a hierarchical navigation structure:
 
-See `src/WLIC.cpp` for implementation details.
+#### Layer 1: Main Menu
 
-### Creating a Custom Interface
+**Home Interface** - The primary landing screen displayed when the program starts
 
-1. **Define display function:**
-   ```cpp
-   void displaySettings() {
-       Brain.Screen.clearScreen();
-       Brain.Screen.printAt(10, 20, "Settings");
-       // Draw your interface
-   }
-   ```
+<img src="assets/home.png" width="600" alt="Home Interface">
 
-2. **Define button coordinates:**
-   ```cpp
-   std::vector<std::vector<double>> settings_coords = {
-       { 20, 220, 50, 90 },   // Brightness
-       { 20, 220, 100, 140 }  // Volume
-   };
-   ```
+From the Home screen, users can navigate to four different interfaces:
 
-3. **Create Interface object:**
-   ```cpp
-   Interface Settings(&settings_coords, nullptr, displaySettings);
-   ```
+#### Layer 2: Main Features
 
-4. **Add to main loop:**
-   ```cpp
-   while(1) {
-       Settings.activate();
-       Interface::reset();
-       wait(100, msec);
-   }
-   ```
+**Heading Interface** - Visual compass display showing robot orientation
 
-## 🛠️ Advanced Features
+<img src="assets/heading.png" width="600" alt="Heading Interface">
 
-### Background Update Tasks
+**Ports Interface** - Motor and sensor port status display
 
-Create dynamic displays that update automatically:
+<img src="assets/ports.png" width="600" alt="Ports Interface">
 
-```cpp
-int updateDisplay() {
-    while(this->index == -1) {
-        // Update display elements
-        Brain.Screen.printAt(10, 20, "Time: %d", Brain.Timer.time());
-        wait(100, msec);
-    }
-    return 0;
-}
+**Auton Select Interface** - Autonomous routine selection menu
 
-Interface MyInterface(display, updateDisplay);
-```
+<img src="assets/auton_select.png" width="600" alt="Auton Select Interface">
 
-### Action Callbacks
+**Utilities Interface** - Additional tools and settings
 
-Execute code when buttons are pressed:
+<img src="assets/util.png" width="600" alt="Utilities Interface">
 
-```cpp
-void handleActions(int buttonIndex) {
-    switch(buttonIndex) {
-        case 0:
-            // Button 0 pressed
-            break;
-        case 1:
-            // Button 1 pressed
-            break;
-    }
-}
+#### Layer 3: Sub-Menus
 
-Interface MyInterface(coords, handleActions, display);
-```
+**Auton Red** - Red alliance autonomous routine options (accessed from Auton Select)
+
+<img src="assets/auton_red.png" width="600" alt="Auton Red Interface">
+
+**Auton Blue** - Blue alliance autonomous routine options (accessed from Auton Select)
+
+<img src="assets/auton_blue.png" width="600" alt="Auton Blue Interface">
+
+**Logo** - Team branding display (accessed from Utilities)
+
+<img src="assets/logo.png" width="600" alt="Logo Interface">
+
+### Customization
+
+All built-in interfaces can be customized or used as templates for your own designs:
+
+- Modify button layouts and coordinates
+- Change colors and graphics
+- Add your team's branding
+- Create new interfaces following the same patterns
+- Link interfaces to build your own navigation hierarchy
+
+See the [API Reference](API_Reference.md) for detailed documentation on creating and customizing interfaces.
 
 ## 🐛 Troubleshooting
 
@@ -262,44 +145,6 @@ Interface MyInterface(coords, handleActions, display);
 ### Multiple interfaces activate simultaneously
 - Only one interface should have `index == -1`
 - Ensure `Interface::reset()` is called regularly
-
-## 📄 API Reference
-
-### Quick Reference
-
-**Interface Creation:**
-```cpp
-Interface(display)                              // Basic
-Interface(coords, actions, display)             // Interactive
-Interface(coords, linked, display)              // Navigation
-Interface(coords, linked, actions, display, update)  // Full
-```
-
-**Core Methods:**
-```cpp
-void setIndex(int)           // Activate interface
-void Display()               // Render and start updates
-void activate()              // Handle touch input
-int InterfaceChooser()       // Detect button press
-static void reset()          // Reset state
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Coding Guidelines
-
-- Follow existing code style and naming conventions
-- Comment button coordinates and complex logic
-- Test on actual VEX V5 hardware when possible
-- Update documentation for new features
 
 ## 📝 License
 

@@ -24,3 +24,6 @@ Thumbs.db
 
 # Private Documentation
 claude.h
+
+# Claude Code Settings
+.claude/

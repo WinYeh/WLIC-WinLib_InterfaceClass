@@ -23,7 +23,7 @@ compile_commands.json
 Thumbs.db
 
 # Private Documentation
-claude.h
+private.h
 
-# Claude Code Settings
-.claude/
+# Private Code Settings
+.private/

@@ -197,6 +197,7 @@ std::vector<std::vector<double>> settings_coords = {
     { 50, 200, 100, 140 }  // Button 1
 };
 
+// Note: Use & for button_coords, but NOT for function pointers
 Interface SettingsScreen(&settings_coords, settingsActions, displaySettings);
 ```
 
@@ -213,13 +214,16 @@ std::vector<std::vector<double>> parent_coords = {
     { 100, 300, 120, 170 }   // Button 1 -> ChildB
 };
 
-// Link child interfaces
+// Link child interfaces - IMPORTANT: Use & for interface objects!
 std::vector<Interface*> parent_linked = {
-    &ChildA,
-    &ChildB
+    &ChildA,     // & is required for interface objects
+    &ChildB      // & is required for interface objects
 };
 
+// IMPORTANT: Use & for both vector parameters
 Interface ParentMenu(&parent_coords, &parent_linked, displayParent);
+//                   ^               ^               no & for function
+//                   Use &           Use &
 
 // Main loop must activate all interfaces
 while(1) {
@@ -235,7 +239,7 @@ while(1) {
 
 ```cpp
 int updateSensorData() {
-    while(this->index == -1) 
+    while(this->index == -1)
     {
         Brain.Screen.setCursor(5, 1);
         Brain.Screen.print("Gyro: %.2f", gyro1.rotation());
@@ -249,7 +253,10 @@ void displaySensors() {
     Brain.Screen.printAt(10, 20, "Sensor Monitor");
 }
 
-Interface SensorMonitor(displaySensors, updateSensorData);
+// Note: Use & for update function pointer (recommended)
+Interface SensorMonitor(displaySensors, &updateSensorData);
+//                      no & here      ^
+//                                     Use & for update function
 ```
 
 ---
@@ -491,7 +498,11 @@ void displayMyInterface() {
 
 ### Step 4: Create an Interface Object
 
-Add your display function to an Interface constructor:
+Add your display function to an Interface constructor.
+
+**IMPORTANT:** Remember to use the address operator (`&`) correctly:
+- ✅ Use `&` for: button coordinate vectors, linked interface vectors, interface objects in vectors
+- ❌ Don't use `&` for: display function pointers
 
 ```cpp
 // In your header file (e.g., display.h)
@@ -519,15 +530,21 @@ void myActions(int buttonIndex) {
     }
 }
 
+// IMPORTANT: Use & for my_coords vector, but NOT for function pointers
 Interface MyInterface(&my_coords, myActions, displayMyInterface);
+//                    ^          no &        no &
+//                    Use & here
 
 // Option 3: Navigation interface
 std::vector<Interface*> my_linked = {
-    &ChildInterface1,
-    &ChildInterface2
+    &ChildInterface1,     // Use & for interface objects
+    &ChildInterface2      // Use & for interface objects
 };
 
+// IMPORTANT: Use & for both vectors
 Interface MyInterface(&my_coords, &my_linked, displayMyInterface);
+//                    ^           ^           no &
+//                    Use &       Use &
 ```
 
 ### Step 5: Activate Your Interface
@@ -564,6 +581,31 @@ std::vector<std::vector<double>> button_coords = {
 ```
 
 **VEX V5 Brain Screen:** 480×240 pixels, origin at top-left (0,0)
+
+**IMPORTANT - Using the Address Operator (&):**
+
+When passing parameters to Interface constructors, you must use the **address operator (`&`)** for the following:
+
+✅ **Use `&` for:**
+- `button_coord` parameter: `&button_coords`
+- `linked_Interface` parameter: `&linked_Interface_vector`
+- Interface objects inside the vector: `&InterfaceObject`
+- Update function pointers (optional but recommended): `&updateFunction`
+
+❌ **Do NOT use `&` for:**
+- Display function pointers: `displayFunction` (not `&displayFunction`)
+- Action function pointers: `actionFunction` (not `&actionFunction`)
+
+**Example:**
+```cpp
+std::vector<std::vector<double>> menu_coords = { /* ... */ };
+std::vector<Interface*> menu_linked = { &ChildInterface1, &ChildInterface2 };
+
+// Correct usage:
+Interface Menu(&menu_coords, &menu_linked, displayMenu);
+//             ^            ^              no & here
+//             Use &        Use &
+```
 
 ### Format Explanation
 
@@ -616,6 +658,11 @@ std::vector<std::vector<double>> menu_coords = {
     { 20, 220, 100, 140 },    // Button 1: (20,100) to (220,140)
     { 340, 480, 180, 240 }    // Button 2: Back button at bottom-right
 };
+
+// When using this in an Interface constructor, remember to use &:
+Interface Menu(&menu_coords, menuActions, displayMenu);
+//             ^
+//             Use & for vector parameter
 ```
 
 ### Tips for Button Placement

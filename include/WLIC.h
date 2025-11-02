@@ -50,7 +50,7 @@ extern int brain_y;
  *
  * @note See API_Reference.md for complete documentation and examples
  */
-extern class Interface
+class Interface
 {
     protected:
         /**

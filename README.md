@@ -66,6 +66,7 @@ WinLib_InterfaceClass/
 ├── .vscode/                # VSCode configuration
 ├── assets/                 # Interface screenshots and images
 ├── makefile                # Build configuration
+├── API_Reference.md        # Complete API documentation
 ├── README.md               # This file
 ├── LICENSE                 # MIT License
 └── .gitignore              # Git ignore rules
@@ -160,19 +161,17 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [VEX Image Converter](https://suhjae.github.io/vex-image/) by suhjae
 - VEX community for feedback and testing
 
-## 📞 Support
+## 📚 Documentation
 
-- **Issues:** Report bugs via [GitHub Issues](https://github.com/WinYeh/WinLib_InterfaceClass/issues)
-- **Documentation:** See the code comments and examples in the repository
-- **VEX Forums:** Discuss on [VEX Forum](https://www.vexforum.com/)
+For complete API documentation, detailed examples, and step-by-step guides on creating custom interfaces, please refer to the **[API Reference](API_Reference.md)**.
 
-## 🗺️ Roadmap
-
-- [ ] Auton Class implementation for autonomous routine management
-- [ ] Animation support for transitions
-- [ ] Touch gesture support (swipe, pinch)
-- [ ] Additional pre-built interface templates
-- [ ] GUI designer tool
+The API Reference includes:
+- Complete constructor documentation with examples
+- Step-by-step guide for creating custom interfaces using Canva
+- Button coordinate system with ruler instructions
+- Interface hierarchy and navigation system explanation
+- All public methods and usage examples
+- VEX Screen API reference
 
 ## 📊 Project Status
 

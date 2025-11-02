@@ -4,7 +4,7 @@ competition Competition;
 
 void pre_auton(void) 
 {
-
+  Monitor(); 
 }
 
 void autonomous(void) 
@@ -14,7 +14,7 @@ void autonomous(void)
 
 void usercontrol(void) 
 {
-  
+
 }
 
 

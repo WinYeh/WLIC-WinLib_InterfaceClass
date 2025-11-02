@@ -14,6 +14,8 @@ motor R2 = motor(PORT7, ratio6_1, false);
 motor R3 = motor(PORT18, ratio6_1, true); 
 motor_group Right = motor_group(R1, R2, R3);
 
+inertial gyro1 = inertial(PORT1);
+
 void vexcodeInit(void) 
 {
     // Nothing to initialize
